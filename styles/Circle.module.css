@@ -1,0 +1,16 @@
+.circle {
+    background-color: #7EE3A0;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 50%;
+    position: absolute;
+    bottom: calc(-375px / 2);
+    animation: rotate_image 10s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+@keyframes rotate_image {
+    100% {
+        transform: rotate(360deg);
+    }
+}
