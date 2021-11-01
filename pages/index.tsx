@@ -1,5 +1,5 @@
 import type {NextPage} from 'next'
-import styles from '../styles/Home.module.css'
+import styles from './Home.module.scss'
 import {Circle} from "../components/main/Circle";
 
 const Home: NextPage = () => {

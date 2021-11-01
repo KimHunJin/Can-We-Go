@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Circle.module.css";
+import styles from "./circle.module.scss";
 
 export const Circle: React.FC = () => {
     return (

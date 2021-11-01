@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
+// next.config.js
 module.exports = {
-  reactStrictMode: true,
+    sassOptions: {
+        includePaths: [
+            './components',
+            './layout',
+            './pages'
+        ],
+    },
 }
