@@ -1,9 +1,13 @@
 import React from "react";
-import styles from "./circle.module.scss";
+import s from "./circle.module.scss";
+import {DomProps} from "../../../lib/DomProps";
 
-export const Circle: React.FC = () => {
+interface Props extends DomProps {
+
+}
+export const Circle: React.FC<Props> = (props) => {
     return (
-        <div className={styles.circle}>
+        <div {...DomProps.extract(props, s.circle)}>
             지구보오오오오온
         </div>
     )

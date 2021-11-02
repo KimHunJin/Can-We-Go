@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./search-bar.module.scss";
-import classNames from "classnames";
+import {DomProps} from "../../../lib/DomProps";
 
-interface Props {
-    className?: string;
+interface Props extends DomProps {
 }
 
 export const SearchBar: React.FC<Props> = (props) => {
     return (
-        <input className={classNames(styles.searchBar, props?.className)} placeholder="가고싶은 도시나 나라를 검색해보세요.">
+        <input {...DomProps.extract(props, styles.searchBar)} placeholder="가고싶은 도시나 나라를 검색해보세요.">
 
         </input>
     )
