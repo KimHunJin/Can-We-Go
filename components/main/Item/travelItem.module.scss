@@ -1,0 +1,70 @@
+.travelItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .metaWrap {
+    .country {
+      color: #434A56;
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 600;
+    }
+
+    .continentWithCountry {
+      font-size: 14px;
+      line-height: 12px;
+      color: #A9B0BC;
+      font-weight: 400;
+      margin-top: 6px;
+    }
+
+    .startDate {
+      font-size: 14px;
+      line-height: 19px;
+      color: #5A6272;
+      font-weight: 400;
+      margin-top: 8px;
+    }
+
+    .preparation {
+      font-size: 14px;
+      line-height: 19px;
+      color: #707B8F;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .vaccination {
+      font-size: 14px;
+      line-height: 19px;
+      color: #5A6272;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+  }
+
+  .imageWrap {
+    width: 116px;
+    height: 139px;
+    box-sizing: border-box;
+    margin-left: auto;
+    position: relative;
+
+    .mainImage {
+      width: 100%;
+      height: 100%;
+      background-color: #C6CAD2;
+    }
+
+    .countryImage {
+      position: absolute;
+      width: 34px;
+      height: 23px;
+      top: 0;
+      right: 0;
+      background-color: #456EFF;
+      border-radius: 0;
+    }
+  }
+}
