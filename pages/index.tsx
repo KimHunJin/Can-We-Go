@@ -48,7 +48,11 @@ const Home: NextPage = () => {
                         </div>
                         <div className={s.itemList}>
                             {Array.from({length: 5}).map((_, index) => (
-                                <TravelItem key={index} className={s.item}/>
+                                <Link key={index} href={`/detail/${index}`}>
+                                    <a>
+                                        <TravelItem className={s.item}/>
+                                    </a>
+                                </Link>
                             ))}
                         </div>
                     </BottomSlider>
