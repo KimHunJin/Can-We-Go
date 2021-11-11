@@ -1,12 +1,13 @@
 import type {NextPage} from 'next'
+import Link from "next/link"
+import {Circle} from "@/components/main/Circle/Circle";
+import {SearchBar} from "@/components/main/SearchBar/SearchBar";
+import {TextView} from "@/components/main/TextView/TextView";
+import {BottomSlider} from "@/components/main/Slider/BottomSlider";
+import {RoundFilter} from "@/components/main/Filter/RoundFilter";
+import {DropdownFilter} from "@/components/main/Filter/DropdownFilter";
+import {TravelItem} from "@/components/main/Item/TravelItem";
 import s from './home.module.scss'
-import {Circle} from "../components/main/Circle/Circle";
-import {SearchBar} from "../components/main/SearchBar/SearchBar";
-import {TextView} from "../components/main/TextView/TextView";
-import {BottomSlider} from "../components/main/Slider/BottomSlider";
-import {RoundFilter} from "../components/main/Filter/RoundFilter";
-import {DropdownFilter} from "../components/main/Filter/DropdownFilter";
-import {TravelItem} from "../components/main/Item/TravelItem";
 
 const Home: NextPage = () => {
     return (
