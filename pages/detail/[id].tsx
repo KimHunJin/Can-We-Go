@@ -1,4 +1,5 @@
-import React, {createRef, useEffect, useRef, useState} from "react";
+import React, {createRef, useEffect, useState} from "react";
+import Link from "next/link"
 import s from "./detail.module.scss";
 import {useRouter} from "next/router";
 import Icon from "@/components/common/Icon/Icon";
@@ -43,7 +44,11 @@ const Detail: React.FC = () => {
     return (
         <div className={s.container} ref={containerRef}>
             <button className={s.closeButton} style={{top: top}}>
-                <Icon iconType={IconTypes.CLOSE_14}/>
+                <Link href={'/'}>
+                    <a>
+                        <Icon iconType={IconTypes.CLOSE_14}/>
+                    </a>
+                </Link>
             </button>
             <div className={s.imageWrap}>
                 이미지
