@@ -1,0 +1,41 @@
+.referenceBox {
+  display: flex;
+  padding: 10px;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  flex-direction: row;
+
+  .iconWrap {
+    display: flex;
+    width: 58px;
+    height: 58px;
+    background-color: #F1F2F4;
+    border-radius: 14px;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .referenceMeta {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: center;
+
+    .type {
+      color: #A9B0BC;
+      font-size: 14px;
+      line-height: 12px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .reference {
+      color: #434A56;
+      font-size: 18px;
+      line-height: 21.6px;
+      font-weight: 600;
+    }
+  }
+}

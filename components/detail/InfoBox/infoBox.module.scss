@@ -1,0 +1,23 @@
+.infoBox {
+  box-sizing: border-box;
+
+  .infoHeader {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #434A56;
+  }
+
+  .descriptions {
+    margin-top: 18px;
+
+    .description {
+      margin-bottom: 14px;
+      box-sizing: border-box;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
