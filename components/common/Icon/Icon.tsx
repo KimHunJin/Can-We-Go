@@ -1,6 +1,6 @@
 import React from "react";
 import {DomProps} from "@/lib/DomProps";
-import Image from "next/Image";
+import Image from "next/image";
 import {IconTypes} from "@/components/common/Icon/iconTypes";
 
 interface Props extends DomProps {
