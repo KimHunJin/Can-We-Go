@@ -22,7 +22,6 @@ export const TravelItem: React.FC<Props> = (props) => {
             </article>
             <div className={s.imageWrap}>
                 <ImageView className={s.mainImage}/>
-                <ImageView className={s.countryImage}/>
             </div>
         </section>
     )

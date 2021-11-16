@@ -9,6 +9,7 @@ import {TextView} from "@/components/main/TextView/TextView";
 import {Line} from "@/components/common/Line/Line";
 import {InfoBox} from "@/components/detail/InfoBox/InfoBox";
 import {ReferenceBox} from "@/components/detail/ReferenceBox/ReferenceBox";
+import {CloseButton} from "@/components/common/CloseButton/CloseButton";
 
 const Detail: React.FC = () => {
 
@@ -50,9 +51,6 @@ const Detail: React.FC = () => {
                     </a>
                 </Link>
             </button>
-            <div className={s.imageWrap}>
-                이미지
-            </div>
             <div className={s.header}>
                 <article className={s.metaWrap}>
                     <TextView className={s.name}>하와이</TextView>
@@ -69,7 +67,8 @@ const Detail: React.FC = () => {
                     infoTitle='👤 자가격리 면제 대상은?'
                     descriptions={[
                         '출국 전 72시간 이내에 하와이 주정부 기관이 지정한 병원에서 실시한 PCR 음성 확인서를 \'온라인 여행 안전 시스템\'에 제출한 사람',
-                        'ESTA 비자를 소지한 사람'
+                        'ESTA 비자를 소지한 사람',
+                        '얀센,아스트라제네카,모더나,화이자 백신을 접종한 사람'
                     ]}
                 />
                 <InfoBox

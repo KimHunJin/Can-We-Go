@@ -1,5 +1,10 @@
 .roundFilter {
-  padding: 10px 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 12px 16px;
   border: 1px solid #E2E5E9;
   border-radius: 50px;
 
@@ -7,4 +12,31 @@
   line-height: 16.8px;
   color: #5A6272;
   box-sizing: border-box;
+
+  .text {
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+  .count {
+    display: flex;
+    color: #FFFFFF;
+    background-color: #6B8BFF;
+    border-radius: 40px;
+    margin-right: 4px;
+
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }

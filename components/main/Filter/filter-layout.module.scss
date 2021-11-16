@@ -1,0 +1,120 @@
+.filterLayout {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FFFFFF;
+
+  .closeButton {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+  }
+
+  .textWrap {
+    margin-top: 100px;
+
+    .title {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 34px;
+      color: #2D3139;
+    }
+  }
+
+  .label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #2D3139;
+
+    .count {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 5px;
+      color: #6B8BFF;
+    }
+  }
+
+  .continentWrap {
+    margin-top: 50px;
+
+    .continents {
+      display: flex;
+      flex-direction: row;
+      margin-top: 20px;
+      flex-wrap: wrap;
+
+      .continentItem {
+        margin-right: 8px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  .vaccineWrap {
+    margin-top: 40px;
+
+    .guide {
+      margin-top: 12px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #8D95A5;
+    }
+
+    .vaccines {
+      display: flex;
+      flex-direction: row;
+      margin-top: 20px;
+      flex-wrap: wrap;
+
+      .vaccine {
+        margin-right: 8px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  .footerWrap {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+
+    .footerButton {
+      display: flex;
+      flex-direction: row;
+      padding: 17px 20px;
+      justify-content: center;
+
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      border-radius: 16px;
+    }
+
+    .clear {
+      flex-grow: 4;
+      color: #8D95A5;
+      background-color: #F1F2F4;
+      margin-right: 10px;
+    }
+
+    .adapt {
+      flex-grow: 11;
+      color: #FFFFFF;
+      background-color: #6B8BFF;
+    }
+  }
+}
