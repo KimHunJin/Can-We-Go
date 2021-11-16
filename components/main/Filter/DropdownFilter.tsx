@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {DomProps} from "../../../lib/DomProps";
+import {DomProps} from "@/lib/DomProps";
 import s from "./dropdown-filter.module.scss";
-import {FilterItemType} from "./RoundFilter";
+import {FilterItemType} from "@/type/filterItemType";
 
 interface Props extends DomProps {
     filterItems?: ReadonlyArray<FilterItemType>

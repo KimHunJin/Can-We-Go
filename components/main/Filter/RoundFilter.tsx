@@ -4,7 +4,6 @@ import s from "./round-filter.module.scss";
 import Icon from "@/components/common/Icon/Icon";
 import {IconTypes} from "@/components/common/Icon/iconTypes";
 
-
 interface Props extends DomProps {
     name: string;
     shortName: string;
