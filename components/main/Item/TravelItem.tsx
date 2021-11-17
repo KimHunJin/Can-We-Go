@@ -1,24 +1,36 @@
 import React from "react";
-import {DomProps} from "../../../lib/DomProps";
-import s from "./travelItem.module.scss";
+import {DomProps} from "@/lib/DomProps";
 import {ImageView} from "../ImageView/ImageView";
 import {TextView} from "../TextView/TextView";
 import {Dot} from "../../common/Dot/Dot";
+import s from "./travel-item.module.scss";
 
 interface Props extends DomProps {
-
+    country: string;
+    continent: string;
+    city: string;
+    preparationCount: number;
+    vaccination: string;
 }
 
-export const TravelItem: React.FC<Props> = (props) => {
+export const TravelItem: React.FC<Props> = (
+    {
+        country,
+        continent,
+        city,
+        preparationCount,
+        vaccination,
+        ...props
+    }
+) => {
 
     return (
         <section {...DomProps.extract(props, s.travelItem)}>
             <article className={s.metaWrap}>
-                <TextView className={s.country}>싱가폴</TextView>
-                <TextView className={s.continentWithCountry}>싱가폴<Dot size={3}/>싱가폴</TextView>
-                <TextView className={s.startDate}>2021.12.31 부터 여행가능</TextView>
-                <TextView className={s.preparation}>준비물 2개</TextView>
-                <TextView className={s.vaccination}>아스트라제네카 백신 불가</TextView>
+                <TextView className={s.country}>{country}</TextView>
+                <TextView className={s.continentWithCity}>{continent}<Dot size={3}/>{city}</TextView>
+                <TextView className={s.preparation}>준비해야 할 항목 {preparationCount}개</TextView>
+                <TextView className={s.vaccination}>{vaccination}</TextView>
             </article>
             <div className={s.imageWrap}>
                 <ImageView className={s.mainImage}/>

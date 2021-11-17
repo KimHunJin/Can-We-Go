@@ -16,6 +16,10 @@
   .text {
     display: inline-block;
     margin-right: 4px;
+
+    &.select {
+      color: #6B8BFF;
+    }
   }
 
   .count {

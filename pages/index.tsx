@@ -7,7 +7,7 @@ import {BottomSlider} from "@/components/main/Slider/BottomSlider";
 import {DropdownFilter} from "@/components/main/Filter/DropdownFilter";
 import {TravelItem} from "@/components/main/Item/TravelItem";
 import s from './home.module.scss'
-import {useState} from "react";
+import React, {useState} from "react";
 import {FilterLayout} from "@/components/main/Filter/FilterLayout";
 import {RoundFilter} from "@/components/main/Filter/RoundFilter";
 import {RoundButton} from "@/components/common/RoundButton/RoundButton";
@@ -16,10 +16,14 @@ import {IconTypes} from "@/components/common/Icon/iconTypes";
 import {ContinentType} from "@/type/continentType";
 import {VaccineType} from "@/type/vaccineType";
 import classNames from "classnames";
+import {FooterItem} from "@/components/main/Item/FooterItem";
+import {ViewType} from "@/type/viewType";
+import {ReferenceBox} from "@/components/detail/ReferenceBox/ReferenceBox";
 
 const Home: NextPage = () => {
 
     const [isVisibleFilter, setIsVisibleFilter] = useState(false);
+    const [viewType, setViewType] = useState<ViewType>('LOCATION');
 
     const [continents, setContinents] = useState<ContinentType[]>([
         {
@@ -82,8 +86,90 @@ const Home: NextPage = () => {
         }
     ]);
 
+    const [country, setCountry] = useState([
+        {
+            country: '싱가폴',
+            continent: '싱가폴',
+            city: '싱가폴',
+            preparation: [
+                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
+                'ESTA 비자',
+                '안전여행시스템 QR코드 및 인쇄물'
+            ],
+            vaccine: "아스트라제네카 백신 불가"
+        },
+        {
+            country: '그라나다',
+            continent: '유럽',
+            city: '스페인',
+            preparation: [
+                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
+                'ESTA 비자',
+            ],
+            vaccine: "아스트라제네카 백신 불가"
+        },
+        {
+            country: '싱가폴',
+            continent: '싱가폴',
+            city: '싱가폴',
+            preparation: [
+                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
+                'ESTA 비자',
+                '안전여행시스템 QR코드 및 인쇄물'
+            ],
+            vaccine: "아스트라제네카 백신 불가"
+        },
+        {
+            country: '그라나다',
+            continent: '유럽',
+            city: '스페인',
+            preparation: [
+                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
+                'ESTA 비자',
+            ],
+            vaccine: "아스트라제네카 백신 불가"
+        },
+        {
+            country: '싱가폴',
+            continent: '싱가폴',
+            city: '싱가폴',
+            preparation: [
+                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
+                'ESTA 비자',
+                '안전여행시스템 QR코드 및 인쇄물'
+            ],
+            vaccine: "아스트라제네카 백신 불가"
+        },
+        {
+            country: '그라나다',
+            continent: '유럽',
+            city: '스페인',
+            preparation: [
+                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
+                'ESTA 비자',
+            ],
+            vaccine: "아스트라제네카 백신 불가"
+        },
+    ])
+
     const handleContinentClick = () => {
-        setIsVisibleFilter(true);
+        const c = continents.filter(it => it.isSelect);
+        if (c.length > 0) {
+            const _c = [...continents].map(it => ({...it, isSelect: false}))
+            setContinents(_c);
+        } else {
+            setIsVisibleFilter(true);
+        }
+    }
+
+    const handleVaccineClick = () => {
+        const v = vaccine.filter(it => it.isSelect);
+        if (v.length > 0) {
+            const _v = [...vaccine].map(it => ({...it, isSelect: false}))
+            setVaccine(_v);
+        } else {
+            setIsVisibleFilter(true);
+        }
     }
 
     const handleCloseButtonClick = () => {
@@ -95,11 +181,8 @@ const Home: NextPage = () => {
         setVaccine(vaccines)
     }
 
-    return (
-        <div className={s.container}>
-            <div className={s.inputWrap}>
-                <SearchBar className={s.input}/>
-            </div>
+    const renderLocationViewType = () => {
+        return (
             <div className={s.mainWrap}>
                 <TextView className={s.mainText}>
                     싱가폴 <br/>
@@ -132,19 +215,19 @@ const Home: NextPage = () => {
                                 className={s.filter}
                                 name="대륙전체"
                                 shortName="대륙"
-                                count={continents.filter(it => it.isSelect).length}
+                                items={continents}
                                 onClick={handleContinentClick}
                             />
                             <RoundFilter
                                 className={s.filter}
                                 name="백신전체"
                                 shortName="백신"
-                                count={vaccine.filter(it => it.isSelect).length}
-                                onClick={handleContinentClick}
+                                items={vaccine}
+                                onClick={handleVaccineClick}
                             />
                         </nav>
                         <div className={s.infoArea}>
-                            <span className={s.totalCount}>전체 100</span>
+                            <span className={s.totalCount}>전체 {country.length}</span>
                             <DropdownFilter
                                 className={s.dropdownFilter}
                                 filterItems={[{name: "최근 추가 순", value: -1}]}
@@ -152,10 +235,17 @@ const Home: NextPage = () => {
                             />
                         </div>
                         <div className={s.itemList}>
-                            {Array.from({length: 5}).map((_, index) => (
+                            {country.map((c, index) => (
                                 <Link key={index} href={`/detail/${index}`}>
                                     <a>
-                                        <TravelItem className={s.item}/>
+                                        <TravelItem
+                                            className={s.item}
+                                            country={c.country}
+                                            continent={c.continent}
+                                            city={c.city}
+                                            preparationCount={c.preparation.length}
+                                            vaccination={c.vaccine}
+                                        />
                                     </a>
                                 </Link>
                             ))}
@@ -163,6 +253,32 @@ const Home: NextPage = () => {
                     </BottomSlider>
                 </div>
             </div>
+        );
+    }
+
+    const renderInfoViewType = () => {
+        return (
+            <div className={s.infoWrap}>
+                <TextView className={s.infoTitle}>
+                    여행가기전,<br/>
+                    꼭 알아야 할 정보!
+                </TextView>
+                <div className={s.infoList}>
+                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="PCR 음성확인서"/>
+                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="ESTA 비자"/>
+                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="안전여행시스템 QR코드 및 인쇄물"/>
+                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="세이프 엑세스 오아후 프로그램"/>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className={s.container}>
+            <div className={s.inputWrap}>
+                <SearchBar className={s.input}/>
+            </div>
+            {viewType === 'LOCATION' ? renderLocationViewType() : renderInfoViewType()}
             {isVisibleFilter && (
                 <FilterLayout
                     continents={continents}
@@ -170,6 +286,25 @@ const Home: NextPage = () => {
                     onCloseButtonClick={handleCloseButtonClick}
                     onAdaptButtonClick={handleAdapt}
                 />
+            )}
+            {!isVisibleFilter && (
+                <div className={s.footer}>
+                    <FooterItem
+                        className={s.location}
+                        text="도시찾기"
+                        iconType={IconTypes.LOCATION_24}
+                        iconHoverType={IconTypes.LOCATION_HOVER_24}
+                        isSelect={viewType === 'LOCATION'}
+                        onClick={() => setViewType('LOCATION')}
+                    />
+                    <FooterItem
+                        text="여행정보"
+                        iconType={IconTypes.INFO_24}
+                        iconHoverType={IconTypes.INFO_HOVER_24}
+                        isSelect={viewType === 'INFO'}
+                        onClick={() => setViewType('INFO')}
+                    />
+                </div>
             )}
         </div>
     )

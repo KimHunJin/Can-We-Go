@@ -1,0 +1,21 @@
+.footerItem {
+  display: flex;
+  flex-direction: column;
+
+  .text {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #A9B0BC;
+    margin-top: 4px;
+
+    &.select {
+      color: #5A6272;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
