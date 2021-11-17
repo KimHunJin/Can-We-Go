@@ -127,58 +127,60 @@ export const FilterLayout: React.FC<Props> = (props) => {
     return (
         <div {...DomProps.extract(props, s.filterLayout)}>
             <CloseButton className={s.closeButton} onClick={handleCloseButton}/>
-            <div className={s.textWrap}>
-                <TextView className={s.title}>
-                    자가격리 없이<br/>
-                    여행갈 수 있는 도시를 찾아보세요!
-                </TextView>
+            <div className={s.wrap}>
+                <div className={s.textWrap}>
+                    <TextView className={s.title}>
+                        자가격리 없이<br/>
+                        여행갈 수 있는 도시를 찾아보세요!
+                    </TextView>
+                </div>
+                <article className={s.continentWrap}>
+                    <TextView className={s.label}>
+                        대륙
+                        {selectContinentCount > 0 && (
+                            <TextView className={s.count}>{selectContinentCount}</TextView>
+                        )}
+                    </TextView>
+                    <section className={s.continents}>
+                        {continents.map(continent => (
+                            <RoundButton
+                                className={s.continentItem}
+                                key={continent.id}
+                                isSelect={continent.isSelect}
+                                onClick={handleContinentClick(continent.id)}
+                                clickable
+                            >
+                                {continent.name}
+                            </RoundButton>
+                        ))}
+                    </section>
+                </article>
+                <article className={s.vaccineWrap}>
+                    <TextView className={s.label}>
+                        백신
+                        {selectVaccineCount > 0 && (
+                            <TextView className={s.count}>{selectVaccineCount}</TextView>
+                        )}
+                    </TextView>
+                    <TextView className={s.guide}>
+                        접종받은 백신을 선택해주세요.<br/>
+                        해당 백신을 허용하는 도시만 찾아드려요.
+                    </TextView>
+                    <section className={s.vaccines}>
+                        {vaccines.map(vaccine => (
+                            <RoundButton
+                                className={s.vaccine}
+                                key={vaccine.id}
+                                isSelect={vaccine.isSelect}
+                                onClick={handleVaccineClick(vaccine.id)}
+                                clickable
+                            >
+                                {vaccine.name}
+                            </RoundButton>
+                        ))}
+                    </section>
+                </article>
             </div>
-            <article className={s.continentWrap}>
-                <TextView className={s.label}>
-                    대륙
-                    {selectContinentCount > 0 && (
-                        <TextView className={s.count}>{selectContinentCount}</TextView>
-                    )}
-                </TextView>
-                <section className={s.continents}>
-                    {continents.map(continent => (
-                        <RoundButton
-                            className={s.continentItem}
-                            key={continent.id}
-                            isSelect={continent.isSelect}
-                            onClick={handleContinentClick(continent.id)}
-                            clickable
-                        >
-                            {continent.name}
-                        </RoundButton>
-                    ))}
-                </section>
-            </article>
-            <article className={s.vaccineWrap}>
-                <TextView className={s.label}>
-                    백신
-                    {selectVaccineCount > 0 && (
-                        <TextView className={s.count}>{selectVaccineCount}</TextView>
-                    )}
-                </TextView>
-                <TextView className={s.guide}>
-                    접종받은 백신을 선택해주세요.<br/>
-                    해당 백신을 허용하는 도시만 찾아드려요.
-                </TextView>
-                <section className={s.vaccines}>
-                    {vaccines.map(vaccine => (
-                        <RoundButton
-                            className={s.vaccine}
-                            key={vaccine.id}
-                            isSelect={vaccine.isSelect}
-                            onClick={handleVaccineClick(vaccine.id)}
-                            clickable
-                        >
-                            {vaccine.name}
-                        </RoundButton>
-                    ))}
-                </section>
-            </article>
             <div className={s.footerWrap}>
                 <button className={classNames(s.clear, s.footerButton)} onClick={handleClearClick}>
                     초기화

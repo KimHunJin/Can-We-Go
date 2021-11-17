@@ -15,8 +15,19 @@
     right: 20px;
   }
 
-  .textWrap {
+  .wrap {
     margin-top: 100px;
+    margin-bottom: 70px;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .textWrap {
 
     .title {
       font-style: normal;
