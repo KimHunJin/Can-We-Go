@@ -172,6 +172,10 @@ const Home: NextPage = () => {
         }
     }
 
+    const handleFilterClick = () => {
+        setIsVisibleFilter(true);
+    }
+
     const handleCloseButtonClick = () => {
         setIsVisibleFilter(false);
     }
@@ -198,13 +202,13 @@ const Home: NextPage = () => {
                             {
                                 continents.some(it => it.isSelect) || vaccine.some(it => it.isSelect)
                                     ? (
-                                        <RoundButton onClick={handleContinentClick}
+                                        <RoundButton onClick={handleFilterClick}
                                                      className={classNames(s.filter, s.filterButton)}>
                                             <Icon iconType={IconTypes.FILTER_16}/>
                                         </RoundButton>
                                     )
                                     : (
-                                        <RoundButton onClick={handleContinentClick}
+                                        <RoundButton onClick={handleFilterClick}
                                                      className={classNames(s.filter, s.noneFilterButton)}>
                                             <Icon iconType={IconTypes.FILTER_HOVER_16}/>
                                         </RoundButton>

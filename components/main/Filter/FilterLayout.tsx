@@ -112,7 +112,7 @@ export const FilterLayout: React.FC<Props> = (props) => {
         ];
 
         setContinents(c);
-        setVaccines(c);
+        setVaccines(v);
         props.onCloseButtonClick?.();
     }
 
