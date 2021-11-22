@@ -92,10 +92,27 @@ const Detail: React.FC = () => {
                 />
                 <div className={s.references}>
                     <TextView className={s.title}>참고할 수 있는 게시글</TextView>
-                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="PCR 음성확인서"/>
-                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="ESTA 비자"/>
-                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="안전여행시스템 QR코드 및 인쇄물"/>
-                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="세이프 엑세스 오아후 프로그램"/>
+                    <div className={s.referenceBoxWrap}>
+                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="PCR 음성확인서"/>
+                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="ESTA 비자"/>
+                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="안전여행시스템 QR코드 및 인쇄물"/>
+                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="세이프 엑세스 오아후 프로그램"/>
+                    </div>
+                </div>
+                <div className={s.tourOfficeWrap}>
+                    <TextView className={s.title}>관광청을 꼭 확인하세요!</TextView>
+                    <TextView className={s.description}>
+                        코로나 상황에 따라 관련 정책이나 지침이 변동될 수 있으니<br/>
+                        해당 나라와 도시의 관광청의 정보를 꼭 확인해 주세요.
+                    </TextView>
+                    <ReferenceBox className={s.referenceBox} type="관광청" reference={"하와이"} referenceType="TOUR"/>
+                </div>
+                <div className={s.notice}>
+                    <TextView className={s.noticeText}>
+                        ‘갈 수 있나?’의 서비스에 표시된 정보는 정책과 지침의 변동 사항에<br/>
+                        의해 정확하지 않을 수 있으며, 그로 인해 발생한<br/>
+                        피해의 경우 ‘갈  수있나?’는 책임지지 않습니다.
+                    </TextView>
                 </div>
             </div>
         </div>

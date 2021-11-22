@@ -65,21 +65,21 @@
   }
 
   .infos {
-    padding: 38px 20px;
+    padding: 38px 20px 108px;
 
     .info {
       margin-bottom: 80px;
     }
 
-    .references {
+    .title {
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 600;
+      text-align: left;
+    }
 
-      .title {
-        font-size: 20px;
-        line-height: 24px;
-        font-weight: 600;
-        text-align: left;
-        margin-bottom: 24px;
-      }
+    .referenceBoxWrap {
+      margin-top: 24px;
 
       .referenceBox {
         margin-bottom: 16px;
@@ -89,6 +89,32 @@
         }
       }
     }
-  }
 
+    .tourOfficeWrap {
+      margin-top: 80px;
+
+      .description {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #A9B0BC;
+        margin-top: 8px;
+        margin-bottom: 24px;
+      }
+    }
+
+    .notice {
+      margin-top: 80px;
+
+      .noticeText {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+        color: #C6CAD2
+      }
+    }
+  }
 }

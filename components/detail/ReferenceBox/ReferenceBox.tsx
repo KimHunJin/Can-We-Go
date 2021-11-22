@@ -9,16 +9,17 @@ interface Props extends DomProps {
     type: string;
     reference: string;
     link?: string;
+    referenceType?: 'REFERENCE' | 'TOUR'
 }
 
-export const ReferenceBox: React.FC<Props> = (props) => {
-
-    const {type, reference, link} = props;
+export const ReferenceBox: React.FC<Props> = (
+    {type, reference, link = '', referenceType = 'REFERENCE', ...props}
+) => {
 
     return (
         <div {...DomProps.extract(props, s.referenceBox)}>
             <div className={s.iconWrap}>
-                <Icon iconType={IconTypes.TEXT_26}/>
+                <Icon iconType={referenceType === 'REFERENCE' ? IconTypes.TEXT_26 : IconTypes.EARTH_26}/>
             </div>
             <article className={s.referenceMeta}>
                 <TextView className={s.type}>{type}</TextView>
