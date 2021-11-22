@@ -9,6 +9,7 @@ import INFO_HOVER_24 from "@/assets/icon/ic_info_24_black.svg";
 import LOCATION_24 from "@/assets/icon/ic_location_24_gray.svg";
 import LOCATION_HOVER_24 from "@/assets/icon/ic_location_24_black.svg";
 import EARTH_26 from '@/assets/icon/ic_earth_26.svg';
+import IC_ARROW_RIGHT_11 from "@/assets/icon/ic_arrow_right_11.svg"
 
 const IconTypes = {
     CLOSE_14: CLOSE_14,
@@ -21,7 +22,8 @@ const IconTypes = {
     INFO_HOVER_24: INFO_HOVER_24,
     LOCATION_24: LOCATION_24,
     LOCATION_HOVER_24: LOCATION_HOVER_24,
-    EARTH_26: EARTH_26
+    EARTH_26: EARTH_26,
+    IC_ARROW_RIGHT_11: IC_ARROW_RIGHT_11
 } as const;
 
 type IconTypes = typeof IconTypes[keyof typeof IconTypes];

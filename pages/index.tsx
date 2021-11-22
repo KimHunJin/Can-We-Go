@@ -1,13 +1,12 @@
+import React, {useState} from "react";
 import type {NextPage} from 'next'
 import Link from "next/link"
-import {Circle} from "@/components/main/Circle/Circle";
+import Image from "next/image";
 import {SearchBar} from "@/components/main/SearchBar/SearchBar";
 import {TextView} from "@/components/main/TextView/TextView";
 import {BottomSlider} from "@/components/main/Slider/BottomSlider";
 import {DropdownFilter} from "@/components/main/Filter/DropdownFilter";
 import {TravelItem} from "@/components/main/Item/TravelItem";
-import s from './home.module.scss'
-import React, {useState} from "react";
 import {FilterLayout} from "@/components/main/Filter/FilterLayout";
 import {RoundFilter} from "@/components/main/Filter/RoundFilter";
 import {RoundButton} from "@/components/common/RoundButton/RoundButton";
@@ -19,6 +18,9 @@ import classNames from "classnames";
 import {FooterItem} from "@/components/main/Item/FooterItem";
 import {ViewType} from "@/type/viewType";
 import {ReferenceBox} from "@/components/detail/ReferenceBox/ReferenceBox";
+import pari from "@/assets/image/paris.svg";
+import yellow from "@/assets/image/yello_image.svg";
+import s from './home.module.scss'
 
 const Home: NextPage = () => {
 
@@ -221,15 +223,24 @@ const Home: NextPage = () => {
     const renderLocationViewType = () => {
         return (
             <div className={s.mainWrap}>
-                <TextView className={s.mainText}>
-                    싱가폴 <br/>
-                    갈 수 있나?
-                </TextView>
-                <TextView className={s.subText}>
-                    2021년 11월 1일부터 자가격리 없이 가능해요!
-                </TextView>
+                <div className={s.mainImageArea}>
+                    <TextView className={s.mainText}>
+                        싱가폴 <br/>
+                        갈 수 있나?
+                    </TextView>
+                    <button className={s.travelButton}>
+                        <TextView className={s.text}>여행 지침 보기</TextView>
+                        <Icon iconType={IconTypes.IC_ARROW_RIGHT_11}/>
+                    </button>
+                    <div className={s.symbol}>
+                        <Image src={pari}/>
+                    </div>
+                    <div className={s.character}>
+                        <Image src={yellow}/>
+                    </div>
+
+                </div>
                 <div className={s.wrap}>
-                    <Circle className={s.earth}/>
                     <BottomSlider className={s.bottomSlider}>
                         <nav className={s.topFilter}>
                             {
