@@ -24,6 +24,7 @@ const Home: NextPage = () => {
 
     const [isVisibleFilter, setIsVisibleFilter] = useState(false);
     const [viewType, setViewType] = useState<ViewType>('LOCATION');
+    const [sortType, setSortType] = useState<'recently' | 'older' | 'less' | 'many'>('recently')
 
     const [continents, setContinents] = useState<ContinentType[]>([
         {
@@ -152,6 +153,25 @@ const Home: NextPage = () => {
         },
     ])
 
+    const sortItems = [
+        {
+            name: '최근 추가 순',
+            value: 'recently'
+        },
+        {
+            name: '오래된 순',
+            value: 'older'
+        },
+        {
+            name: '준비 서류 적은 순',
+            value: 'less'
+        },
+        {
+            name: '준비 서류 많은 순',
+            value: 'many'
+        }
+    ]
+
     const handleContinentClick = () => {
         const c = continents.filter(it => it.isSelect);
         if (c.length > 0) {
@@ -183,6 +203,19 @@ const Home: NextPage = () => {
     const handleAdapt = (continents: ContinentType[], vaccines: VaccineType[]) => {
         setContinents(continents);
         setVaccine(vaccines)
+    }
+
+    const handleSortClick = (value: string | number) => {
+        if (
+            value !== 'recently' &&
+            value !== 'older' &&
+            value !== 'less' &&
+            value !== 'many'
+        ) {
+            return;
+        }
+
+        setSortType(value);
     }
 
     const renderLocationViewType = () => {
@@ -234,8 +267,9 @@ const Home: NextPage = () => {
                             <span className={s.totalCount}>전체 {country.length}</span>
                             <DropdownFilter
                                 className={s.dropdownFilter}
-                                filterItems={[{name: "최근 추가 순", value: -1}]}
-                                value={-1}
+                                filterItems={sortItems}
+                                value={sortType}
+                                onSortItemClick={handleSortClick}
                             />
                         </div>
                         <div className={s.itemList}>

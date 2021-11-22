@@ -1,0 +1,23 @@
+.selector {
+  width: 170px;
+  padding: 8px 0;
+  background-color: #FFFFFF;
+
+  .item {
+    width: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8D95A5;
+    padding: 13px 20px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+
+    &:hover {
+      color: #5A6272;
+      background: #F7F8FA;
+      cursor: pointer;
+    }
+  }
+}
