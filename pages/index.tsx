@@ -330,6 +330,7 @@ const Home: NextPage = () => {
             {viewType === 'LOCATION' ? renderLocationViewType() : renderInfoViewType()}
             {isVisibleFilter && (
                 <FilterLayout
+                    className={s.filterLayout}
                     continents={continents}
                     vaccine={vaccine}
                     onCloseButtonClick={handleCloseButtonClick}
