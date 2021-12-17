@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import type {NextPage} from 'next'
 import Link from "next/link"
 import Image from "next/image";
@@ -21,6 +21,8 @@ import {ReferenceBox} from "@/components/detail/ReferenceBox/ReferenceBox";
 import pari from "@/assets/image/paris.svg";
 import yellow from "@/assets/image/yello_image.svg";
 import s from './home.module.scss'
+import data from "../content/index.json";
+import {CountryType} from "@/type/countryType";
 
 const Home: NextPage = () => {
 
@@ -28,43 +30,7 @@ const Home: NextPage = () => {
     const [viewType, setViewType] = useState<ViewType>('LOCATION');
     const [sortType, setSortType] = useState<'recently' | 'older' | 'less' | 'many'>('recently')
 
-    const [continents, setContinents] = useState<ContinentType[]>([
-        {
-            id: 1,
-            name: '동북아시아',
-            isSelect: false
-        },
-        {
-            id: 2,
-            name: '동남아시아',
-            isSelect: false
-        },
-        {
-            id: 3,
-            name: '서남아시아',
-            isSelect: false
-        },
-        {
-            id: 4,
-            name: '유럽',
-            isSelect: false
-        },
-        {
-            id: 5,
-            name: '대양주',
-            isSelect: false
-        },
-        {
-            id: 6,
-            name: '미주/캐나다',
-            isSelect: false
-        },
-        {
-            id: 7,
-            name: '아프리카',
-            isSelect: false
-        }
-    ]);
+    const [continents, setContinents] = useState<ContinentType[]>([]);
 
     const [vaccine, setVaccine] = useState<VaccineType[]>([
         {
@@ -89,71 +55,7 @@ const Home: NextPage = () => {
         }
     ]);
 
-    const [country, setCountry] = useState([
-        {
-            country: '싱가폴',
-            continent: '싱가폴',
-            city: '싱가폴',
-            preparation: [
-                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
-                'ESTA 비자',
-                '안전여행시스템 QR코드 및 인쇄물'
-            ],
-            vaccine: "아스트라제네카 백신 불가"
-        },
-        {
-            country: '그라나다',
-            continent: '유럽',
-            city: '스페인',
-            preparation: [
-                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
-                'ESTA 비자',
-            ],
-            vaccine: "아스트라제네카 백신 불가"
-        },
-        {
-            country: '싱가폴',
-            continent: '싱가폴',
-            city: '싱가폴',
-            preparation: [
-                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
-                'ESTA 비자',
-                '안전여행시스템 QR코드 및 인쇄물'
-            ],
-            vaccine: "아스트라제네카 백신 불가"
-        },
-        {
-            country: '그라나다',
-            continent: '유럽',
-            city: '스페인',
-            preparation: [
-                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
-                'ESTA 비자',
-            ],
-            vaccine: "아스트라제네카 백신 불가"
-        },
-        {
-            country: '싱가폴',
-            continent: '싱가폴',
-            city: '싱가폴',
-            preparation: [
-                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
-                'ESTA 비자',
-                '안전여행시스템 QR코드 및 인쇄물'
-            ],
-            vaccine: "아스트라제네카 백신 불가"
-        },
-        {
-            country: '그라나다',
-            continent: '유럽',
-            city: '스페인',
-            preparation: [
-                'PCR 음성확인서\n하와이 주정부 기관이 지정한 병원에서 실시\n출국 전 72시간 내 검사',
-                'ESTA 비자',
-            ],
-            vaccine: "아스트라제네카 백신 불가"
-        },
-    ])
+    const [country, setCountry] = useState<CountryType[]>([]);
 
     const sortItems = [
         {
@@ -173,6 +75,66 @@ const Home: NextPage = () => {
             value: 'many'
         }
     ]
+
+
+    useEffect(() => {
+        const continentsSet = new Set<string>();
+        data.vaccine.forEach(it => {
+            continentsSet.add(it.continent);
+        });
+        const _continents = [...continentsSet.values()].map((it, index) => ({
+            id: index,
+            name: it,
+            isSelect: false
+        }))
+        setContinents(_continents);
+    }, [])
+
+    useEffect(() => {
+        let _country: CountryType[] = data.vaccine.map(it => ({
+            key: it.key + "",
+            country: it.country,
+            continent: it.continent,
+            city: it.country,
+            preparation: it.preparationList.map(p => p.content),
+            vaccine: it.referenceList[0]?.content ?? '',
+            image: it.image,
+            updateDate: it.updateDate
+        }))
+
+        if (continents.filter(it => it.isSelect).length > 0) {
+            _country = _country.filter(it => continents.filter(c => c.isSelect).some(c => c.name === it.continent));
+        }
+
+        switch (sortType) {
+            case "recently": {
+                _country = _country.sort(
+                    (a, b) => Date.parse(b.updateDate) - Date.parse(a.updateDate)
+                )
+                break;
+            }
+            case "older": {
+                _country = _country.sort(
+                    (a, b) => Date.parse(a.updateDate) - Date.parse(b.updateDate)
+                )
+                break;
+            }
+            case "less": {
+                _country = _country.sort(
+                    (a, b) => a.preparation.length - b.preparation.length
+                )
+                break;
+            }
+            case "many": {
+                _country = _country.sort(
+                    (a, b) => b.preparation.length - a.preparation.length
+                )
+                break;
+            }
+        }
+
+        setCountry(_country);
+    }, [continents, sortType])
 
     const handleContinentClick = () => {
         const c = continents.filter(it => it.isSelect);
@@ -284,8 +246,8 @@ const Home: NextPage = () => {
                             />
                         </div>
                         <div className={s.itemList}>
-                            {country.map((c, index) => (
-                                <Link key={index} href={`/detail/${index}`}>
+                            {country.map((c) => (
+                                <Link key={c.key} href={`/detail/${c.key}`}>
                                     <a>
                                         <TravelItem
                                             className={s.item}
@@ -294,6 +256,7 @@ const Home: NextPage = () => {
                                             city={c.city}
                                             preparationCount={c.preparation.length}
                                             vaccination={c.vaccine}
+                                            image={c.image}
                                         />
                                     </a>
                                 </Link>

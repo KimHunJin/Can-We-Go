@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "script": "node .script/gSheet.js",
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn run script && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "classnames": "^2.3.1",
+    "dotenv": "^10.0.0",
+    "google-spreadsheet": "^3.2.0",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.43.4"
+    "sass": "^1.43.4",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@types/react": "17.0.32",

@@ -11,6 +11,7 @@ interface Props extends DomProps {
     city: string;
     preparationCount: number;
     vaccination: string;
+    image?: string;
 }
 
 export const TravelItem: React.FC<Props> = (
@@ -20,6 +21,7 @@ export const TravelItem: React.FC<Props> = (
         city,
         preparationCount,
         vaccination,
+        image,
         ...props
     }
 ) => {
@@ -33,7 +35,7 @@ export const TravelItem: React.FC<Props> = (
                 <TextView className={s.vaccination}>{vaccination}</TextView>
             </article>
             <div className={s.imageWrap}>
-                <ImageView className={s.mainImage}/>
+                <ImageView className={s.mainImage} url={image}/>
             </div>
         </section>
     )

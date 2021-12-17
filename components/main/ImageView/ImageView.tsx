@@ -8,6 +8,6 @@ interface Props extends DomProps {
 
 export const ImageView: React.FC<Props> = (props) => {
     return (
-        <img {...DomProps.extract(props, s.imageView)}/>
+        <img {...DomProps.extract(props, s.imageView)} src={props.url}/>
     )
 }
