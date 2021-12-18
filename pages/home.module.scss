@@ -1,16 +1,16 @@
-@mixin animation ($delay, $duration, $name) {
+@mixin animation($delay, $duration, $name) {
   animation-delay: $delay;
   animation-duration: $duration;
   animation-name: $name
 }
 
-@mixin keyframe ($animation_name) {
+@mixin keyframe($animation_name) {
   @keyframes #{$animation_name} {
     @content;
   }
 }
 
-@include keyframe (moveSymbol) {
+@include keyframe(moveSymbol) {
   from {
     transform: translateX(-300%);
   }
@@ -20,7 +20,7 @@
   }
 }
 
-@include keyframe (moveCharacter) {
+@include keyframe(moveCharacter) {
   from {
     transform: translateX(calc(100%));
   }
@@ -38,14 +38,6 @@
   background-color: #6B8BFF;
   width: 100%;
   height: 100%;
-
-  .inputWrap {
-    margin: 20px;
-
-    .input {
-      width: 100%;
-    }
-  }
 
   .filterLayout {
     z-index: 3;
@@ -80,50 +72,67 @@
     }
   }
 
-  .mainImageArea {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    padding: 40px 40px 0;
+  .topLabelArea {
+    color: #FFFFFF;
+    font-size: 18px;
+    line-height: 28px;
+    height: 56px;
+    padding: 20px 20px 0;
     box-sizing: border-box;
 
-    .travelButton {
-      display: flex;
-      flex-direction: row;
-      padding: 12px 16px;
-      justify-content: center;
-      align-items: center;
-      margin-top: 30px;
+    transition: opacity 0.3s linear 2s;
+  }
 
-      background: #FFFFFF;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      border-radius: 30px;
+  .mainImageArea {
+    position: absolute;
+    width: 100%;
+    height: 450px;
+    padding: 0 40px;
+    box-sizing: border-box;
 
-      .text {
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 20px;
-        color: #6B8BFF;
-        margin-right: 8px;
-        margin-top: 2px;
+    .topAnimationWrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .travelButton {
+        display: flex;
+        flex-direction: row;
+        padding: 12px 16px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+
+        background: #FFFFFF;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 30px;
+
+        .text {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 20px;
+          color: #6B8BFF;
+          margin-right: 8px;
+          margin-top: 2px;
+        }
       }
-    }
 
-    .symbol {
-      position: absolute;
-      left: 117px;
-      bottom: 0;
-      z-index: 2;
-      @include animation (0s, 4s, moveSymbol);
-    }
+      .symbol {
+        position: absolute;
+        left: 117px;
+        bottom: 0;
+        z-index: 2;
+        @include animation(0s, 4s, moveSymbol);
+      }
 
-    .character {
-      position: absolute;
-      right: 23px;
-      bottom: 0;
-      z-index: 2;
-      @include animation (0s, 4s, moveCharacter);
+      .character {
+        position: absolute;
+        right: 23px;
+        bottom: 0;
+        z-index: 2;
+        @include animation(0s, 4s, moveCharacter);
+      }
     }
   }
 
@@ -161,9 +170,11 @@
 
     .bottomSlider {
       position: absolute;
+      top: 450px;
       min-height: 100%;
       padding: 24px 20px 59px;
       box-sizing: border-box;
+      z-index: 3;
 
       .topFilter {
         display: flex;
@@ -220,6 +231,7 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    z-index: 5;
 
     .location {
       margin-right: 20px;

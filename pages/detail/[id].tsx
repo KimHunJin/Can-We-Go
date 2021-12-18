@@ -105,8 +105,6 @@ const Detail: React.FC = () => {
                     <div className={s.referenceBoxWrap}>
                         <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="PCR 음성확인서"/>
                         <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="ESTA 비자"/>
-                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="안전여행시스템 QR코드 및 인쇄물"/>
-                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="세이프 엑세스 오아후 프로그램"/>
                     </div>
                 </div>
                 <div className={s.tourOfficeWrap}>

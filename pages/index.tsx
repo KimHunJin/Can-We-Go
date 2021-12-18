@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {createRef, useEffect, useRef, useState} from "react";
 import type {NextPage} from 'next'
 import Link from "next/link"
 import Image from "next/image";
@@ -26,11 +26,15 @@ import {CountryType} from "@/type/countryType";
 
 const Home: NextPage = () => {
 
+    const scrollRef = createRef<HTMLDivElement>();
+
     const [isVisibleFilter, setIsVisibleFilter] = useState(false);
     const [viewType, setViewType] = useState<ViewType>('LOCATION');
     const [sortType, setSortType] = useState<'recently' | 'older' | 'less' | 'many'>('recently')
 
     const [continents, setContinents] = useState<ContinentType[]>([]);
+
+    const [isLabelVisible, setIsLabelVisible] = useState(false);
 
     const [vaccine, setVaccine] = useState<VaccineType[]>([
         {
@@ -75,6 +79,26 @@ const Home: NextPage = () => {
             value: 'many'
         }
     ]
+
+    useEffect(() => {
+
+        const listener = () => {
+            const scrollTop = scrollRef.current?.scrollTop ?? 0;
+
+            window.requestAnimationFrame(() => {
+                if (scrollTop > 450) {
+                    setIsLabelVisible(true)
+                } else {
+                    setIsLabelVisible(false)
+                }
+            })
+        }
+
+        if (scrollRef) {
+            scrollRef.current?.addEventListener('scroll', listener);
+            return scrollRef.current?.removeEventListener('scroll', () => listener)
+        }
+    }, [scrollRef])
 
 
     useEffect(() => {
@@ -184,87 +208,93 @@ const Home: NextPage = () => {
 
     const renderLocationViewType = () => {
         return (
-            <div className={s.mainWrap}>
-                <div className={s.mainImageArea}>
-                    <TextView className={s.mainText}>
-                        싱가폴 <br/>
-                        갈 수 있나?
-                    </TextView>
-                    <button className={s.travelButton}>
-                        <TextView className={s.text}>여행 지침 보기</TextView>
-                        <Icon iconType={IconTypes.IC_ARROW_RIGHT_11}/>
-                    </button>
-                    <div className={s.symbol}>
-                        <Image src={pari}/>
-                    </div>
-                    <div className={s.character}>
-                        <Image src={yellow}/>
-                    </div>
-
+            <>
+                <div className={s.topLabelArea}>
+                    {isLabelVisible && "갈 수 있나?"}
                 </div>
-                <div className={s.wrap}>
-                    <BottomSlider className={s.bottomSlider}>
-                        <nav className={s.topFilter}>
-                            {
-                                continents.some(it => it.isSelect) || vaccine.some(it => it.isSelect)
-                                    ? (
-                                        <RoundButton onClick={handleFilterClick}
-                                                     className={classNames(s.filter, s.filterButton)}>
-                                            <Icon iconType={IconTypes.FILTER_16}/>
-                                        </RoundButton>
-                                    )
-                                    : (
-                                        <RoundButton onClick={handleFilterClick}
-                                                     className={classNames(s.filter, s.noneFilterButton)}>
-                                            <Icon iconType={IconTypes.FILTER_HOVER_16}/>
-                                        </RoundButton>
-                                    )
-                            }
+                <div className={s.mainWrap} ref={scrollRef}>
+                    <div className={s.mainImageArea}>
+                        <div className={s.topAnimationWrap}>
+                            <TextView className={s.mainText}>
+                                싱가폴 <br/>
+                                갈 수 있나?
+                            </TextView>
+                            <button className={s.travelButton}>
+                                <TextView className={s.text}>여행 지침 보기</TextView>
+                                <Icon iconType={IconTypes.IC_ARROW_RIGHT_11}/>
+                            </button>
+                            <div className={s.symbol}>
+                                <Image src={pari}/>
+                            </div>
+                            <div className={s.character}>
+                                <Image src={yellow}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={s.wrap}>
+                        <BottomSlider className={s.bottomSlider}>
+                            <nav className={s.topFilter}>
+                                {
+                                    continents.some(it => it.isSelect) || vaccine.some(it => it.isSelect)
+                                        ? (
+                                            <RoundButton onClick={handleFilterClick}
+                                                         className={classNames(s.filter, s.filterButton)}>
+                                                <Icon iconType={IconTypes.FILTER_16}/>
+                                            </RoundButton>
+                                        )
+                                        : (
+                                            <RoundButton onClick={handleFilterClick}
+                                                         className={classNames(s.filter, s.noneFilterButton)}>
+                                                <Icon iconType={IconTypes.FILTER_HOVER_16}/>
+                                            </RoundButton>
+                                        )
+                                }
 
-                            <RoundFilter
-                                className={s.filter}
-                                name="대륙전체"
-                                shortName="대륙"
-                                items={continents}
-                                onClick={handleContinentClick}
-                            />
-                            <RoundFilter
-                                className={s.filter}
-                                name="백신전체"
-                                shortName="백신"
-                                items={vaccine}
-                                onClick={handleVaccineClick}
-                            />
-                        </nav>
-                        <div className={s.infoArea}>
-                            <span className={s.totalCount}>전체 {country.length}</span>
-                            <DropdownFilter
-                                className={s.dropdownFilter}
-                                filterItems={sortItems}
-                                value={sortType}
-                                onSortItemClick={handleSortClick}
-                            />
-                        </div>
-                        <div className={s.itemList}>
-                            {country.map((c) => (
-                                <Link key={c.key} href={`/detail/${c.key}`}>
-                                    <a>
-                                        <TravelItem
-                                            className={s.item}
-                                            country={c.country}
-                                            continent={c.continent}
-                                            city={c.city}
-                                            preparationCount={c.preparation.length}
-                                            vaccination={c.vaccine}
-                                            image={c.image}
-                                        />
-                                    </a>
-                                </Link>
-                            ))}
-                        </div>
-                    </BottomSlider>
+                                <RoundFilter
+                                    className={s.filter}
+                                    name="대륙전체"
+                                    shortName="대륙"
+                                    items={continents}
+                                    onClick={handleContinentClick}
+                                />
+                                <RoundFilter
+                                    className={s.filter}
+                                    name="백신전체"
+                                    shortName="백신"
+                                    items={vaccine}
+                                    onClick={handleVaccineClick}
+                                />
+                            </nav>
+                            <div className={s.infoArea}>
+                                <span className={s.totalCount}>전체 {country.length}</span>
+                                <DropdownFilter
+                                    className={s.dropdownFilter}
+                                    filterItems={sortItems}
+                                    value={sortType}
+                                    onSortItemClick={handleSortClick}
+                                />
+                            </div>
+                            <div className={s.itemList}>
+                                {country.map((c) => (
+                                    <Link key={c.key} href={`/detail/${c.key}`}>
+                                        <a>
+                                            <TravelItem
+                                                className={s.item}
+                                                country={c.country}
+                                                continent={c.continent}
+                                                city={c.city}
+                                                preparationCount={c.preparation.length}
+                                                vaccination={c.vaccine}
+                                                image={c.image}
+                                            />
+                                        </a>
+                                    </Link>
+                                ))}
+                            </div>
+                        </BottomSlider>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 
@@ -287,9 +317,6 @@ const Home: NextPage = () => {
 
     return (
         <div className={s.container}>
-            <div className={s.inputWrap}>
-                <SearchBar className={s.input}/>
-            </div>
             {viewType === 'LOCATION' ? renderLocationViewType() : renderInfoViewType()}
             {isVisibleFilter && (
                 <FilterLayout
