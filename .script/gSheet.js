@@ -26,15 +26,18 @@ function getGoogleSheet() {
                 const preparation = doc.sheetsByTitle['Preparation'];
                 const reference = doc.sheetsByTitle['Reference'];
                 const exemption = doc.sheetsByTitle['Exemption'];
+                const vaccineList = doc.sheetsByTitle['Vaccine'];
 
                 const vaccineRow = await vaccine.getRows();
                 const preparationRow = await preparation.getRows();
                 const referenceRow = await reference.getRows();
                 const exemptionRow = await exemption.getRows();
+                const vaccineListRow = await vaccineList.getRows();
 
                 const preparationMap = {};
                 const referenceMap = {};
                 const exemptionMap = {};
+                const vaccineListMap = {};
 
                 preparationRow.forEach(it => {
                     const row = it['_rawData'];
@@ -68,6 +71,16 @@ function getGoogleSheet() {
                     }
                 })
 
+                vaccineListRow.forEach(it => {
+                    const row = it['_rawData'];
+                    const key = row[0];
+                    const content = row[1];
+                    vaccineListMap[key] = {
+                        id: key,
+                        content: content
+                    }
+                })
+
                 const vaccineMap = vaccineRow.map((it, index) => {
                     const row = it['_rawData'];
                     const key = index;
@@ -90,6 +103,12 @@ function getGoogleSheet() {
                     const officeUrl = row[5] ?? '';
                     const image = row[6] ?? '';
                     const updateDate = row[7] ?? new Date();
+
+                    const _vaccineList = row[8].length > 0 ? row[8] : null;
+                    const vaccineList = _vaccineList?.split(',')?.map(it => {
+                        return vaccineListMap[it];
+                    }) ?? [];
+
                     return {
                         key,
                         continent,
@@ -99,7 +118,8 @@ function getGoogleSheet() {
                         referenceList,
                         officeUrl,
                         image,
-                        updateDate
+                        updateDate,
+                        vaccineList
                     }
                 });
 
@@ -107,7 +127,8 @@ function getGoogleSheet() {
                     preparation: preparationMap,
                     reference: referenceMap,
                     exemption: exemptionMap,
-                    vaccine: vaccineMap
+                    vaccine: vaccineListMap,
+                    main: vaccineMap
                 }
 
                 fs.writeFile('content/index.json', JSON.stringify(json), { flag: 'w+' }, function (err) {
