@@ -46,7 +46,7 @@ const Detail: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        const d = data.vaccine.find(it => `${it.key}` === id);
+        const d = data.main.find(it => `${it.key}` === id);
         if (d) {
             setContent({
                 key: d.key,

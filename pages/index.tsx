@@ -36,29 +36,7 @@ const Home: NextPage = () => {
 
     const [isLabelVisible, setIsLabelVisible] = useState(false);
 
-    const [vaccine, setVaccine] = useState<VaccineType[]>([
-        {
-            id: 1,
-            name: '화이자',
-            isSelect: false
-        },
-        {
-            id: 2,
-            name: '모더나',
-            isSelect: false
-        },
-        {
-            id: 3,
-            name: '얀센',
-            isSelect: false
-        },
-        {
-            id: 4,
-            name: '아스트라제네카',
-            isSelect: false
-        }
-    ]);
-
+    const [vaccine, setVaccine] = useState<VaccineType[]>([]);
     const [country, setCountry] = useState<CountryType[]>([]);
 
     const sortItems = [
@@ -103,7 +81,7 @@ const Home: NextPage = () => {
 
     useEffect(() => {
         const continentsSet = new Set<string>();
-        data.vaccine.forEach(it => {
+        data.main.forEach(it => {
             continentsSet.add(it.continent);
         });
         const _continents = [...continentsSet.values()].map((it, index) => ({
@@ -111,23 +89,39 @@ const Home: NextPage = () => {
             name: it,
             isSelect: false
         }))
+
+        const _vaccineList = [...Object.values(data.vaccine)].map(it => ({
+            id: it.id,
+            name: it.content,
+            isSelect: false
+        }));
+
         setContinents(_continents);
+        setVaccine(_vaccineList);
     }, [])
 
     useEffect(() => {
-        let _country: CountryType[] = data.vaccine.map(it => ({
+        let _country: CountryType[] = data.main.map(it => ({
             key: it.key + "",
             country: it.country,
             continent: it.continent,
             city: it.country,
             preparation: it.preparationList.map(p => p.content),
-            vaccine: it.referenceList[0]?.content ?? '',
+            vaccine: it.vaccineList.map(v => ({
+                id: v.id,
+                name: v.content,
+                isSelect: false
+            })),
             image: it.image,
             updateDate: it.updateDate
         }))
 
         if (continents.filter(it => it.isSelect).length > 0) {
             _country = _country.filter(it => continents.filter(c => c.isSelect).some(c => c.name === it.continent));
+        }
+
+        if (vaccine.filter(it => it.isSelect).length > 0) {
+            _country = _country.filter(it => vaccine.filter(v => v.isSelect).some(v => it.vaccine.findIndex(iv => iv.id === v.id) >= 0));
         }
 
         switch (sortType) {
@@ -158,7 +152,7 @@ const Home: NextPage = () => {
         }
 
         setCountry(_country);
-    }, [continents, sortType])
+    }, [continents, sortType, vaccine])
 
     const handleContinentClick = () => {
         const c = continents.filter(it => it.isSelect);
