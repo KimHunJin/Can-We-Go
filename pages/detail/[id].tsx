@@ -85,21 +85,27 @@ const Detail: React.FC = () => {
             </div>
             <Line/>
             <div className={s.infos}>
-                <InfoBox
-                    className={s.info}
-                    infoTitle='👤 자가격리 면제 대상은?'
-                    descriptions={content?.exemptionList.map(it => it.content) ?? []}
-                />
-                <InfoBox
-                    className={s.info}
-                    infoTitle='🎒 뭘 준비해야 하나요?'
-                    descriptions={content?.preparationList.map(it => it.content) ?? []}
-                />
-                <InfoBox
-                    className={s.info}
-                    infoTitle='✅️ 참고하세요!'
-                    descriptions={content?.referenceList.map(it => it.content) ?? []}
-                />
+                {(content?.exemptionList ?? []).length > 0 && (
+                    <InfoBox
+                        className={s.info}
+                        infoTitle='👤 자가격리 면제 대상은?'
+                        descriptions={content?.exemptionList.map(it => it.content) ?? []}
+                    />
+                )}
+                {(content?.preparationList ?? []).length > 0 && (
+                    <InfoBox
+                        className={s.info}
+                        infoTitle='🎒 뭘 준비해야 하나요?'
+                        descriptions={content?.preparationList.map(it => it.content) ?? []}
+                    />
+                )}
+                {(content?.referenceList ?? []).length > 0 && (
+                    <InfoBox
+                        className={s.info}
+                        infoTitle='✅️ 참고하세요!'
+                        descriptions={content?.referenceList.map(it => it.content) ?? []}
+                    />
+                )}
                 <div className={s.references}>
                     <TextView className={s.title}>참고할 수 있는 게시글</TextView>
                     <div className={s.referenceBoxWrap}>
