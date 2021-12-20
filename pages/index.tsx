@@ -2,7 +2,6 @@ import React, {createRef, useEffect, useRef, useState} from "react";
 import type {NextPage} from 'next'
 import Link from "next/link"
 import Image from "next/image";
-import {SearchBar} from "@/components/main/SearchBar/SearchBar";
 import {TextView} from "@/components/main/TextView/TextView";
 import {BottomSlider} from "@/components/main/Slider/BottomSlider";
 import {DropdownFilter} from "@/components/main/Filter/DropdownFilter";
