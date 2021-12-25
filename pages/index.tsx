@@ -17,8 +17,11 @@ import classNames from "classnames";
 import {FooterItem} from "@/components/main/Item/FooterItem";
 import {ViewType} from "@/type/viewType";
 import {ReferenceBox} from "@/components/detail/ReferenceBox/ReferenceBox";
-import pari from "@/assets/image/paris.svg";
-import yellow from "@/assets/image/yello_image.svg";
+import gal from "@/assets/image/gal.svg";
+import soo from "@/assets/image/soo.svg"
+import it from "@/assets/image/it.svg"
+import na from "@/assets/image/na.svg"
+import foot from "@/assets/image/main-back-footer.svg"
 import s from './home.module.scss'
 import data from "../content/index.json";
 import {CountryType} from "@/type/countryType";
@@ -37,6 +40,13 @@ const Home: NextPage = () => {
 
     const [vaccine, setVaccine] = useState<VaccineType[]>([]);
     const [country, setCountry] = useState<CountryType[]>([]);
+
+    const [countryIndex, setCountryIndex] = useState(0);
+    const [characterIndex, setCharacterIndex] = useState(0);
+
+    const [character] = useState([
+        gal, soo, it, na
+    ])
 
     const sortItems = [
         {
@@ -153,6 +163,23 @@ const Home: NextPage = () => {
         setCountry(_country);
     }, [continents, sortType, vaccine])
 
+    useEffect(() => {
+
+        let index = 0;
+
+        if (country) {
+            const interval = setInterval(() => {
+                index++;
+                const _index = index % country.length;
+                const _characterIndex = index % character.length;
+                setCountryIndex(_index);
+                setCharacterIndex(_characterIndex);
+            }, 2000);
+
+            return () => clearInterval(interval);
+        }
+    }, [country])
+
     const handleContinentClick = () => {
         const c = continents.filter(it => it.isSelect);
         if (c.length > 0) {
@@ -199,6 +226,10 @@ const Home: NextPage = () => {
         setSortType(value);
     }
 
+    const handleMainButtonClick = () => {
+
+    }
+
     const renderLocationViewType = () => {
         return (
             <>
@@ -208,19 +239,25 @@ const Home: NextPage = () => {
                 <div className={s.mainWrap} ref={scrollRef}>
                     <div className={s.mainImageArea}>
                         <div className={s.topAnimationWrap}>
-                            <TextView className={s.mainText}>
-                                싱가폴 <br/>
-                                갈 수 있나?
-                            </TextView>
-                            <button className={s.travelButton}>
-                                <TextView className={s.text}>여행 지침 보기</TextView>
-                                <Icon iconType={IconTypes.IC_ARROW_RIGHT_11}/>
-                            </button>
-                            <div className={s.symbol}>
-                                <Image src={pari}/>
+                            <div className={s.textWrap}>
+                                <TextView className={s.mainText}>
+                                    {country[countryIndex]?.country} <br/>
+                                    갈 수 있나?
+                                </TextView>
+                                <div className={s.travelButton}>
+                                    <Link href={`/detail/${country[countryIndex]?.key}`}>
+                                        <a>
+                                            <TextView className={s.text}>여행 지침 보기</TextView>
+                                            <Icon iconType={IconTypes.IC_ARROW_RIGHT_11}/>
+                                        </a>
+                                    </Link>
+                                </div>
                             </div>
                             <div className={s.character}>
-                                <Image src={yellow}/>
+                                <Image src={character[characterIndex]}/>
+                            </div>
+                            <div className={s.characterFooter}>
+                                <Image src={foot}/>
                             </div>
                         </div>
                     </div>
