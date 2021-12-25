@@ -24,6 +24,16 @@ const Detail: React.FC = () => {
 
     const [content, setContent] = useState<DetailCountryType | null>(null)
 
+    const handleShareClick = () => {
+        const textarea = document.createElement("textarea");
+        document.body.appendChild(textarea);
+        textarea.value = window.location.href;
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("URL을 복사했습니다.");
+    }
+
     useEffect(() => {
 
         const listener = () => {
@@ -80,7 +90,7 @@ const Detail: React.FC = () => {
                     </TextView>
                 </article>
                 <article className={s.buttonWrap}>
-                    <button className={s.shareButton}>공유하기</button>
+                    <button className={s.shareButton} onClick={handleShareClick}>공유하기</button>
                 </article>
             </div>
             <Line/>
