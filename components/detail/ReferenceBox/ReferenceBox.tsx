@@ -1,5 +1,5 @@
 import {DomProps} from "@/lib/DomProps";
-import React from "react";
+import React, { useState } from "react";
 import s from "./referenceBox.module.scss";
 import {TextView} from "@/components/main/TextView/TextView";
 import Icon from "@/components/common/Icon/Icon";
@@ -16,8 +16,18 @@ export const ReferenceBox: React.FC<Props> = (
     {type, reference, link = '', referenceType = 'REFERENCE', ...props}
 ) => {
 
+    const [isAbleClick] = useState(referenceType === 'TOUR' && link.length > 0);
+
+    const handleClick = () => {
+        if (!isAbleClick) {
+            return;
+        }
+
+        window.open(link);
+    }
+
     return (
-        <div {...DomProps.extract(props, s.referenceBox)}>
+        <div {...DomProps.extract(props, s.referenceBox, isAbleClick && s.hover)} onClick={handleClick}>
             <div className={s.iconWrap}>
                 <Icon iconType={referenceType === 'REFERENCE' ? IconTypes.TEXT_26 : IconTypes.EARTH_26}/>
             </div>

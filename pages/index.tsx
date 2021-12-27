@@ -226,10 +226,6 @@ const Home: NextPage = () => {
         setSortType(value);
     }
 
-    const handleMainButtonClick = () => {
-
-    }
-
     const renderLocationViewType = () => {
         return (
             <>
