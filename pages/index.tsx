@@ -359,14 +359,26 @@ const Home: NextPage = () => {
                         iconType={IconTypes.LOCATION_24}
                         iconHoverType={IconTypes.LOCATION_HOVER_24}
                         isSelect={viewType === 'LOCATION'}
-                        onClick={() => setViewType('LOCATION')}
+                        onClick={() => {
+                            if (viewType === 'LOCATION') {
+                                return;
+                            }
+                            setViewType('LOCATION');
+                            setIsLabelVisible(false)
+                        }}
                     />
                     <FooterItem
                         text="여행정보"
                         iconType={IconTypes.INFO_24}
                         iconHoverType={IconTypes.INFO_HOVER_24}
                         isSelect={viewType === 'INFO'}
-                        onClick={() => setViewType('INFO')}
+                        onClick={() => {
+                            if (viewType === 'INFO') {
+                                return;
+                            }
+                            setViewType('INFO');
+                            setIsLabelVisible(false)
+                        }}
                     />
                 </div>
             )}
