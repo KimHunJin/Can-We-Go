@@ -224,6 +224,11 @@
 
         .item {
           margin-bottom: 30px;
+
+          &:hover {
+            transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out, -moz-transform .2s ease-in-out;
+            filter: drop-shadow(6px 6px 8px rgba(0, 0, 0, .2))
+          }
         }
       }
     }
