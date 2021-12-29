@@ -35,7 +35,7 @@ export const TravelItem: React.FC<Props> = (
         <section {...DomProps.extract(props, s.travelItem)}>
             <article className={s.metaWrap}>
                 <TextView className={s.country}>{country}</TextView>
-                <TextView className={s.continentWithCity}>{continent}<Dot size={3}/>{city}</TextView>
+                <TextView className={s.continentWithCity}>{continent}<Dot className={s.dot} size={3}/>{city}</TextView>
                 <TextView className={s.preparation}>준비해야 할 항목 {preparationCount}개</TextView>
                 <TextView className={s.vaccination}>{vaccineText}</TextView>
             </article>
