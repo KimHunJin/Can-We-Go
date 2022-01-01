@@ -326,16 +326,21 @@ const Home: NextPage = () => {
 
     const renderInfoViewType = () => {
         return (
-            <div className={s.infoWrap}>
-                <TextView className={s.infoTitle}>
-                    여행가기전,<br/>
-                    꼭 알아야 할 정보!
-                </TextView>
-                <div className={s.infoList}>
-                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="PCR 음성확인서"/>
-                    <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="ESTA 비자"/>
+            <>
+                <div className={s.topLabelArea}>
+                    갈 수 있나?
                 </div>
-            </div>
+                <div className={s.infoWrap}>
+                    <TextView className={s.infoTitle}>
+                        여행가기전,<br/>
+                        꼭 알아야 할 정보!
+                    </TextView>
+                    <div className={s.infoList}>
+                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="PCR 음성확인서"/>
+                        <ReferenceBox className={s.referenceBox} type="증명서/확인서" reference="ESTA 비자"/>
+                    </div>
+                </div>
+            </>
         );
     }
 
