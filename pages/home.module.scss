@@ -235,7 +235,8 @@
   }
 
   .footer {
-    position: absolute;
+    position: fixed;
+    max-width: 420px;
     display: flex;
     flex-direction: row;
     bottom: 0;
