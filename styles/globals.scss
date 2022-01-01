@@ -386,6 +386,7 @@ textarea {
   position: relative;
   height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
 }
 
 .background-title {
@@ -427,6 +428,7 @@ textarea {
   max-width: 420px;
   overflow: hidden;
   margin: 0 auto;
+  overflow: hidden;
   height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
 }
