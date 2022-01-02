@@ -1,26 +1,26 @@
-import React, {useEffect} from "react";
+import React, {createRef, useEffect} from "react";
 import {Background} from "@/components/common/Background";
 
 export default function Layout({children}: { children: React.ReactNode }) {
+
+    const ref = createRef<HTMLDivElement>();
+
     useEffect(() => {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
 
-        window.addEventListener("resize", () => {
-            console.log("resize");
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty("--vh", `${vh}px`);
-        });
+        const removeEvent = (e: React.WheelEvent | React.MouseEvent | React.TouchEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+        }
 
-        setTimeout(function() {
-            window.scrollTo(0, 1);
-        }, 0);
+        ref.current?.addEventListener('touchmove', () => removeEvent, {passive: false});
+        ref.current?.addEventListener('onclick', () => removeEvent, {passive: false});
+        ref.current?.addEventListener('mousewheel', () => removeEvent, {passive: false});
     }, [])
 
     return (
         <Background>
             <main>
-                <div className='container'>
+                <div className='container' ref={ref}>
                     {children}
                 </div>
             </main>
